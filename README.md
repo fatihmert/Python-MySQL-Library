@@ -28,6 +28,9 @@ one_data = {
 
 pymysql.insert('users',one_data)
 
+# Inserted Id
+pymysq.inserted_id
+
 # Multiple insert data
 # Should be same columns each data
 mult_data = [
