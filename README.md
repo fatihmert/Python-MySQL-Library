@@ -5,7 +5,7 @@ Download MySQL Connecter [download](http://dev.mysql.com/downloads/connector/pyt
 
 ## Example
 
-```
+```python
 pymysql = MySQL("localhost","fmdogancan","root","")
 
 # Get all
