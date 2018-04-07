@@ -1,9 +1,11 @@
-#-*- coding: utf-8 -*-
 
 pymysql = MySQL("localhost","fmdogancan","root","")
 
 # Get all
 pymysql.all("SELECT * FROM users")
+
+# Row counts
+pymysql.count 
 
 # Get all with Where
 pymysql.all("SELECT * FROM users WHERE role = %s AND group_ = %s",('admin',5))
@@ -21,9 +23,6 @@ one_data = {
 }
 
 pymysql.insert('users',one_data)
-
-# Inserted Id
-pymysql.inserted_id
 
 # Multiple insert data
 # Should be same columns each data
@@ -75,5 +74,14 @@ pymysql.usedb('other_db')
 
 # Get Config Details
 pymysql.getConfig()
+
+# Raw Query
+pymysql.rawQuery("ALTER TABLE users ADD ip_addr varchar(30)")
+
+# Table Exist
+pymysql.tableExist('posts')
+
+# DB Exist
+pymysql.dbExist('other_db')
 
 
