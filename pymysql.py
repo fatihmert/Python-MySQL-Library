@@ -164,6 +164,32 @@ class MySQL:
 		
 		return self.all(query,None)
 
+
+	def rawQuery(self,query):
+		return self.__commit(query)
+
+	def tableExist(self,name):
+		query = "SELECT table_name FROM information_schema.tables WHERE table_schema = '%s' AND table_name = '%s'"%(str(self.config['database']),str(name))
+		
+		self.all(query,None)
+
+		return self.__convert_true_false(self.count)
+
+	def dbExist(self,name=None):
+		if name is None:
+			name = self.config['database']
+		query = "SELECT * FROM information_schema.tables WHERE table_schema = '%s' GROUP BY table_schema"%str(name)
+		
+		self.all(query,None)
+
+		return self.__convert_true_false(self.count)
+
+
+	def __convert_true_false(self,chk):
+		if chk > 0:
+			return True
+		return False
+
 	def __checkif_check(self,check):
 		if check:
 			return "IF NOT EXISTS"
@@ -175,8 +201,6 @@ class MySQL:
 		else:
 			return ""
 
-	def rawQuery(self,query):
-		return self.__commit(query)
 
 	def __commit(self,query):
 		try:
